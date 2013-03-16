@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Page {
@@ -54,7 +56,7 @@ public class Page {
         while ((nextline = reader.readLine()) != null ) {  
           sb.append(nextline);
         }
-        content = sb.toString();
+        content = decode(sb.toString());
       } catch (IOException e) {
         content = "";
 //        e.printStackTrace();
@@ -62,5 +64,19 @@ public class Page {
     } else {
       content = "";
     }
+  }
+  
+  static final Pattern reUnicode = Pattern.compile("\\\\u([0-9a-zA-Z]{4})");
+  public static String decode(String s) {
+      Matcher m = reUnicode.matcher(s);
+      StringBuffer sb = new StringBuffer(s.length());
+      while (m.find()) {
+//          m.appendReplacement(sb,
+//                  Character.toString((char) Integer.parseInt(m.group(1), 16)));
+        m.appendReplacement(sb,
+          "...");
+      }
+      m.appendTail(sb);
+      return sb.toString();
   }
 }

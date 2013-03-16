@@ -1,6 +1,9 @@
 package org.yin.Dict;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.yin.Json.JSONArray;
 import org.yin.Json.JSONException;
@@ -59,5 +62,19 @@ public class Lookup {
       parse(page.getContent());
       print();
     }
+  }
+  
+  static final Pattern reUnicode = Pattern.compile("\\\\u([0-9a-zA-Z]{4})");
+  public static String decode(String s) {
+      Matcher m = reUnicode.matcher(s);
+      StringBuffer sb = new StringBuffer(s.length());
+      while (m.find()) {
+//          m.appendReplacement(sb,
+//                  Character.toString((char) Integer.parseInt(m.group(1), 16)));
+        m.appendReplacement(sb,
+          "...");
+      }
+      m.appendTail(sb);
+      return sb.toString();
   }
 }

@@ -9,6 +9,6 @@ if [ $# = 0 ]; then
 fi
 
 WORDS=$1
-java -jar "$bin"/Dict-*-with-*.jar $WORDS
+java -jar "$bin/../target"/Dict-*-with-*.jar $WORDS | tee -a "/Users/liyinhgqw/MyApps/Dict/log/history" 
 
 
