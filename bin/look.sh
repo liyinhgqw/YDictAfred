@@ -10,5 +10,5 @@ fi
 
 WORDS=$1
 java -jar "$bin/../target"/Dict-*-with-*.jar $WORDS | tee -a "/Users/liyinhgqw/MyApps/Dict/log/history" 
-
+echo "" >> "/Users/liyinhgqw/MyApps/Dict/log/history"
 
